@@ -12,7 +12,7 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "Title": {
+    "title": {
       "type": "string",
       "required": true
     },
@@ -25,7 +25,6 @@
     },
     "slug": {
       "type": "uid",
-      "targetField": "Title",
       "required": true
     },
     "sumary": {
@@ -60,15 +59,14 @@
       "type": "date",
       "required": true
     },
-    "Platform": {
+    "platform": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::platform.platform"
+    },
+    "trailer": {
       "type": "string",
       "required": true
-    },
-    "wishlist": {
-      "type": "relation",
-      "relation": "manyToOne",
-      "target": "api::wishlist.wishlist",
-      "inversedBy": "games"
     }
   }
 }

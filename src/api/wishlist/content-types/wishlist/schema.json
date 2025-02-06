@@ -17,11 +17,10 @@
       "relation": "oneToOne",
       "target": "plugin::users-permissions.user"
     },
-    "games": {
+    "game": {
       "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::game.game",
-      "mappedBy": "wishlist"
+      "relation": "oneToOne",
+      "target": "api::game.game"
     }
   }
 }

@@ -4,7 +4,8 @@
   "info": {
     "singularName": "address",
     "pluralName": "addresses",
-    "displayName": "address"
+    "displayName": "address",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -21,7 +22,6 @@
     },
     "address_line_2": {
       "type": "string",
-      "default": "apt/suite/#",
       "required": false
     },
     "city": {
@@ -44,6 +44,10 @@
       "type": "relation",
       "relation": "oneToOne",
       "target": "plugin::users-permissions.user"
+    },
+    "title": {
+      "type": "string",
+      "required": true
     }
   }
 }

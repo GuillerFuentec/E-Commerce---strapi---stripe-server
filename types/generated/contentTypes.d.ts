@@ -770,8 +770,7 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
       'manyToOne',
       'plugin::users-permissions.role'
     >;
-    firstname: Attribute.String;
-    lastname: Attribute.String;
+    name: Attribute.String;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
@@ -795,6 +794,7 @@ export interface ApiAddressAddress extends Schema.CollectionType {
     singularName: 'address';
     pluralName: 'addresses';
     displayName: 'address';
+    description: '';
   };
   options: {
     draftAndPublish: true;
@@ -802,7 +802,7 @@ export interface ApiAddressAddress extends Schema.CollectionType {
   attributes: {
     name: Attribute.String & Attribute.Required;
     address_line_1: Attribute.String & Attribute.Required;
-    address_line_2: Attribute.String & Attribute.DefaultTo<'apt/suite/#'>;
+    address_line_2: Attribute.String;
     city: Attribute.String & Attribute.Required;
     state: Attribute.String & Attribute.Required;
     phone: Attribute.String & Attribute.Required;
@@ -812,6 +812,7 @@ export interface ApiAddressAddress extends Schema.CollectionType {
       'oneToOne',
       'plugin::users-permissions.user'
     >;
+    title: Attribute.String & Attribute.Required;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -842,21 +843,21 @@ export interface ApiGameGame extends Schema.CollectionType {
     draftAndPublish: true;
   };
   attributes: {
-    Title: Attribute.String & Attribute.Required;
+    title: Attribute.String & Attribute.Required;
     price: Attribute.Decimal & Attribute.Required;
     discount: Attribute.Integer;
-    slug: Attribute.UID<'api::game.game', 'Title'> & Attribute.Required;
+    slug: Attribute.UID & Attribute.Required;
     sumary: Attribute.Text & Attribute.Required;
     cover: Attribute.Media<'images', true> & Attribute.Required;
     wallpaper: Attribute.Media<'images'> & Attribute.Required;
     screenshots: Attribute.Media<'images', true> & Attribute.Required;
     realaseDate: Attribute.Date & Attribute.Required;
-    Platform: Attribute.String & Attribute.Required;
-    wishlist: Attribute.Relation<
+    platform: Attribute.Relation<
       'api::game.game',
-      'manyToOne',
-      'api::wishlist.wishlist'
+      'oneToOne',
+      'api::platform.platform'
     >;
+    trailer: Attribute.String & Attribute.Required;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -916,8 +917,8 @@ export interface ApiPlatformPlatform extends Schema.CollectionType {
     draftAndPublish: true;
   };
   attributes: {
-    Title: Attribute.String & Attribute.Required;
-    slug: Attribute.UID<'api::platform.platform', 'Title'> & Attribute.Required;
+    title: Attribute.String & Attribute.Required;
+    slug: Attribute.UID<'api::platform.platform', 'title'> & Attribute.Required;
     icon: Attribute.Media<'images'> & Attribute.Required;
     order: Attribute.Integer & Attribute.Required;
     createdAt: Attribute.DateTime;
@@ -955,9 +956,9 @@ export interface ApiWishlistWishlist extends Schema.CollectionType {
       'oneToOne',
       'plugin::users-permissions.user'
     >;
-    games: Attribute.Relation<
+    game: Attribute.Relation<
       'api::wishlist.wishlist',
-      'oneToMany',
+      'oneToOne',
       'api::game.game'
     >;
     createdAt: Attribute.DateTime;
