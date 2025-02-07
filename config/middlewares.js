@@ -1,24 +1,35 @@
 module.exports = [
-  "strapi::logger",
   "strapi::errors",
-  "strapi::security",
-  {
-    name: "strapi::cors",
-    config: {
-      enabled: true,
-      origin: ["http://localhost:3000"],
-      headers: [
-        "Content-Type",
-        "Authorization",
-        "X-Frame-Options",
-        "content-types",
-      ],
-    },
-  },
+  "strapi::cors",
   "strapi::poweredBy",
+  "strapi::logger",
   "strapi::query",
   "strapi::body",
   "strapi::session",
   "strapi::favicon",
   "strapi::public",
+  {
+    name: "strapi::security",
+    config: {
+      contentSecurityPolicy: {
+        useDefaults: true,
+        directives: {
+          "connect-src": ["'self'", "https:"],
+          "img-src": [
+            "'self'",
+            "data:",
+            "blob:",
+            "dl.airtable.com",
+          ],
+          "media-src": [
+            "'self'",
+            "data:",
+            "blob:",
+            "dl.airtable.com",
+          ],
+          upgradeInsecureRequests: null,
+        },
+      },
+    },
+  },
 ];
